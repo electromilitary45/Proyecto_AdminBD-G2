@@ -625,6 +625,22 @@ VALUES (4, 4, 'Cartago centro, Cartago');
 INSERT INTO direccion (id_direccion, id_provincia, direccion_general)
 VALUES (5, 5, 'Playa Jacó, Puntarenas');
 
+INSERT INTO direccion (id_direccion, id_provincia, direccion_general)
+VALUES (6, 1, 'Barrio Escalante, San José');
+
+INSERT INTO direccion (id_direccion, id_provincia, direccion_general)
+VALUES (7, 2, 'Barrio Santa Lucía, Heredia');
+
+INSERT INTO direccion (id_direccion, id_provincia, direccion_general)
+VALUES (8, 3, 'Barrio San Rafael, Alajuela');
+
+INSERT INTO direccion (id_direccion, id_provincia, direccion_general)
+VALUES (9, 4, 'Barrio Oreamuno, Cartago');
+
+INSERT INTO direccion (id_direccion, id_provincia, direccion_general)
+VALUES (10, 5, 'Barrio Cariari, Limón');
+
+
 --TABLA DIRECCION_CLIENTE--
 
 INSERT INTO direccion_cliente (cedula_cliente, id_direccion)
@@ -642,6 +658,74 @@ VALUES ('555555555', 4);
 INSERT INTO direccion_cliente (cedula_cliente, id_direccion)
 VALUES ('666666666', 5);
 
+--TABLA DIRECCION PROVEEDOR--
+
+INSERT INTO direccion_proveedor (id_proveedor, id_direccion)
+VALUES ('PROV003', 6);
+
+INSERT INTO direccion_proveedor (id_proveedor, id_direccion)
+VALUES ('PROV004', 7);
+
+INSERT INTO direccion_proveedor (id_proveedor, id_direccion)
+VALUES ('PROV005', 8);
+
+INSERT INTO direccion_proveedor (id_proveedor, id_direccion)
+VALUES ('PROV003', 9);
+
+INSERT INTO direccion_proveedor (id_proveedor, id_direccion)
+VALUES ('PROV004', 10);
+
+--TABLA VENTAS--
+
+INSERT INTO ventas (id_venta, monto_factura, fecha_venta, cedula_cliente, cedula_empleado)
+VALUES (1, 450.50, TO_DATE('2023-07-25', 'YYYY-MM-DD'), '987654321', '111111111');
+
+INSERT INTO ventas (id_venta, monto_factura, fecha_venta, cedula_cliente, cedula_empleado)
+VALUES (2, 320.25, TO_DATE('2023-07-24', 'YYYY-MM-DD'), '123456789', '222222222');
+
+INSERT INTO ventas (id_venta, monto_factura, fecha_venta, cedula_cliente, cedula_empleado)
+VALUES (3, 180.75, TO_DATE('2023-07-23', 'YYYY-MM-DD'), '987654321', '111111111');
+
+INSERT INTO ventas (id_venta, monto_factura, fecha_venta, cedula_cliente, cedula_empleado)
+VALUES (4, 400.75, TO_DATE('2023-07-22', 'YYYY-MM-DD'), '123456789', '111111111');
+
+INSERT INTO ventas (id_venta, monto_factura, fecha_venta, cedula_cliente, cedula_empleado)
+VALUES (5, 250.50, TO_DATE('2023-07-21', 'YYYY-MM-DD'), '987654321', '444444444');
 
 
+--TABLA METODO_VENTAS--
+
+INSERT INTO metodo_venta (id_venta, id_metodo)
+VALUES (1, 3);
+
+INSERT INTO metodo_venta (id_venta, id_metodo)
+VALUES (2, 2);
+
+INSERT INTO metodo_venta (id_venta, id_metodo)
+VALUES (3, 1);
+
+INSERT INTO metodo_venta (id_venta, id_metodo)
+VALUES (4, 3);
+
+INSERT INTO metodo_venta (id_venta, id_metodo)
+VALUES (5, 2);
+
+--TABLA INVENTARIO--
+
+INSERT INTO inventario (id_proveedor, id_producto, cantidad)
+VALUES ('PROV002', 3, 75);
+
+INSERT INTO inventario (id_proveedor, id_producto, cantidad)
+VALUES ('PROV001', 4, 200);
+
+INSERT INTO inventario (id_proveedor, id_producto, cantidad)
+VALUES ('PROV002', 5, 100);
+
+INSERT INTO inventario (id_proveedor, id_producto, cantidad)
+VALUES ('PROV003', 3, 100);
+
+INSERT INTO inventario (id_proveedor, id_producto, cantidad)
+VALUES ('PROV004', 4, 150);
+
+--TERMINAN INSERTS--
 
