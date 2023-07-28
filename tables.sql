@@ -19,7 +19,6 @@ DISCONNECT;
 
 
 --Oracle SQL Developer, establecer conexion con el usuario anteriormente creado--
-
 --Script con los defaults, temporary y fecha de creacion.
 SELECT USERNAME,DEFAULT_TABLESPACE,TEMPORARY_TABLESPACE,CREATED
 FROM DBA_USERS
@@ -311,65 +310,65 @@ EXP GRUPO02/clave02 FILE='C:\proyecto_admin\backup\BACKUPBD.DMP' LOG= 'C:\proyec
 Exportando los usuarios especificados ...
 . exportando acciones y objetos de procedimiento pre-esquema
 . exportando nombres de biblioteca de funciones ajenas para el usuario GRUPO02
-. exportando sinænimos de tipo p∑blico
-. exportando sinænimos de tipo privado
+. exportando sinÔøΩnimos de tipo pÔøΩblico
+. exportando sinÔøΩnimos de tipo privado
 . exportando definiciones de tipos de objetos para el usuario GRUPO02
 Exportando los objetos de GRUPO02  ...
 . exportando enlaces a la base de datos
-. exportando n∑meros de secuencia
+. exportando nÔøΩmeros de secuencia
 . exportando definiciones de cluster
-. exportando las tablas de GRUPO02 a trav⁄s de la Ruta de Acceso Convencional ...
+. exportando las tablas de GRUPO02 a travÔøΩs de la Ruta de Acceso Convencional ...
 . exportando la tabla                       CLIENTES          0 filas exportadas
-EXP-00091: Exportando estad›sticas cuestionables.
+EXP-00091: Exportando estadÔøΩsticas cuestionables.
 . exportando la tabla                      DIRECCION          0 filas exportadas
-EXP-00091: Exportando estad›sticas cuestionables.
+EXP-00091: Exportando estadÔøΩsticas cuestionables.
 . exportando la tabla              DIRECCION_CLIENTE          0 filas exportadas
-EXP-00091: Exportando estad›sticas cuestionables.
+EXP-00091: Exportando estadÔøΩsticas cuestionables.
 . exportando la tabla            DIRECCION_PROVEEDOR          0 filas exportadas
-EXP-00091: Exportando estad›sticas cuestionables.
+EXP-00091: Exportando estadÔøΩsticas cuestionables.
 . exportando la tabla                      EMPLEADOS          0 filas exportadas
-EXP-00091: Exportando estad›sticas cuestionables.
+EXP-00091: Exportando estadÔøΩsticas cuestionables.
 . exportando la tabla                     INVENTARIO          0 filas exportadas
-EXP-00091: Exportando estad›sticas cuestionables.
+EXP-00091: Exportando estadÔøΩsticas cuestionables.
 . exportando la tabla                   METODOS_PAGO          0 filas exportadas
-EXP-00091: Exportando estad›sticas cuestionables.
+EXP-00091: Exportando estadÔøΩsticas cuestionables.
 . exportando la tabla                   METODO_VENTA          0 filas exportadas
-EXP-00091: Exportando estad›sticas cuestionables.
+EXP-00091: Exportando estadÔøΩsticas cuestionables.
 . exportando la tabla                      PRODUCTOS          0 filas exportadas
-EXP-00091: Exportando estad›sticas cuestionables.
+EXP-00091: Exportando estadÔøΩsticas cuestionables.
 . exportando la tabla                    PROVEEDORES          0 filas exportadas
-EXP-00091: Exportando estad›sticas cuestionables.
+EXP-00091: Exportando estadÔøΩsticas cuestionables.
 . exportando la tabla          PROVEEDORES_TELEFONOS          0 filas exportadas
-EXP-00091: Exportando estad›sticas cuestionables.
+EXP-00091: Exportando estadÔøΩsticas cuestionables.
 . exportando la tabla                     PROVINCIAS          0 filas exportadas
-EXP-00091: Exportando estad›sticas cuestionables.
+EXP-00091: Exportando estadÔøΩsticas cuestionables.
 . exportando la tabla                        PUESTOS          0 filas exportadas
-EXP-00091: Exportando estad›sticas cuestionables.
+EXP-00091: Exportando estadÔøΩsticas cuestionables.
 . exportando la tabla               TELEFONO_CLIENTE          0 filas exportadas
-EXP-00091: Exportando estad›sticas cuestionables.
+EXP-00091: Exportando estadÔøΩsticas cuestionables.
 . exportando la tabla                      TELEFONOS          0 filas exportadas
-EXP-00091: Exportando estad›sticas cuestionables.
+EXP-00091: Exportando estadÔøΩsticas cuestionables.
 . exportando la tabla                 VENTA_PRODUCTO          0 filas exportadas
-EXP-00091: Exportando estad›sticas cuestionables.
+EXP-00091: Exportando estadÔøΩsticas cuestionables.
 . exportando la tabla                         VENTAS          0 filas exportadas
-EXP-00091: Exportando estad›sticas cuestionables.
-. exportando sinænimos
+EXP-00091: Exportando estadÔøΩsticas cuestionables.
+. exportando sinÔøΩnimos
 . exportando vistas
 . exportando procedimientos almacenados
 . exportando operadores
 . exportando restricciones de integridad referencial
 . exportando disparadores
-. exportando tipos de ›ndice
-. exportando ›ndices bitmap, funcionales y extensibles
+. exportando tipos de ÔøΩndice
+. exportando ÔøΩndices bitmap, funcionales y extensibles
 . exportando acciones de posttables
 . exportando vistas materializadas
-. exportando logs de instantﬂneas
+. exportando logs de instantÔøΩneas
 . exportando colas de trabajo
 . exportando grupos de refrescamiento y secundarios
 . exportando dimensiones
 . exportando acciones y objetos de procedimiento post-esquema
-. exportando estad›sticas
-La exportaciæn ha terminado correctamente pero con advertencias.
+. exportando estadÔøΩsticas
+La exportaciÔøΩn ha terminado correctamente pero con advertencias.
 
 */
 --Migracion de la base de datos 
@@ -439,8 +438,210 @@ BEGIN
     comments        => 'Carga datos de la vista_facturas_fecha a historicos_facturas diariamente a la 1:00 AM.'
   );
 END;
- --Compruebo que se haya creado y que estÈ activo
+ --Compruebo que se haya creado y que estÔøΩ activo
 SELECT job_name, start_date, repeat_interval, enabled
 FROM user_scheduler_jobs
 WHERE job_name = 'CARGAR_HISTORICOS_FACTURAS';
 --------JOBS--------
+
+--EMPIEZAN INSERTS DE TABLAS--
+
+--TABLA PROVINCIA--
+
+INSERT INTO provincias (id_provincia, nombre_provincia)
+VALUES (1, 'San Jos√©');
+
+INSERT INTO provincias (id_provincia, nombre_provincia)
+VALUES (2, 'Heredia');
+
+INSERT INTO provincias (id_provincia, nombre_provincia)
+VALUES (3, 'Alajuela');
+
+INSERT INTO provincias (id_provincia, nombre_provincia)
+VALUES (4, 'Cartago');
+
+INSERT INTO provincias (id_provincia, nombre_provincia)
+VALUES (5, 'Puntarenas');
+
+INSERT INTO provincias (id_provincia, nombre_provincia)
+VALUES (6, 'Guanacaste');
+
+INSERT INTO provincias (id_provincia, nombre_provincia)
+VALUES (7, 'Lim√≥n');
+
+--TABLA CLIENTES--
+
+INSERT INTO clientes (cedula_cliente, nombre_cliente)
+VALUES ('123456789', 'Pedro P√©rez');
+
+INSERT INTO clientes (cedula_cliente, nombre_cliente)
+VALUES ('987654321', 'Mar√≠a S√°nchez');
+
+INSERT INTO clientes (cedula_cliente, nombre_cliente)
+VALUES ('555555555', 'Roberto Castro');
+
+INSERT INTO clientes (cedula_cliente, nombre_cliente)
+VALUES ('666666666', 'Susana Vega');
+
+INSERT INTO clientes (cedula_cliente, nombre_cliente)
+VALUES ('777777777', 'Andr√©s Sol√≠s');
+
+--TABLA PROVEEDORES--
+
+INSERT INTO proveedores (id_proveedor, nombre_proveedor, descripcion_material)
+VALUES ('PROV001', 'Proveedor A', 'Materiales de construcci√≥n');
+
+INSERT INTO proveedores (id_proveedor, nombre_proveedor, descripcion_material)
+VALUES ('PROV002', 'Proveedor B', 'Electrodom√©sticos');
+
+INSERT INTO proveedores (id_proveedor, nombre_proveedor, descripcion_material)
+VALUES ('PROV003', 'Proveedor C', 'Art√≠culos electr√≥nicos');
+
+INSERT INTO proveedores (id_proveedor, nombre_proveedor, descripcion_material)
+VALUES ('PROV004', 'Proveedor D', 'Ropa y accesorios');
+
+INSERT INTO proveedores (id_proveedor, nombre_proveedor, descripcion_material)
+VALUES ('PROV005', 'Proveedor E', 'Herramientas de jardiner√≠a');
+
+--TABLA PRODUCTOS--
+
+INSERT INTO productos (id_producto, descripcion_producto, precio_producto)
+VALUES (1, 'Sof√° de 3 plazas', 500.00);
+
+INSERT INTO productos (id_producto, descripcion_producto, precio_producto)
+VALUES (2, 'Mesa de comedor', 350.00);
+
+INSERT INTO productos (id_producto, descripcion_producto, precio_producto)
+VALUES (3, 'Silla de escritorio', 120.00);
+
+INSERT INTO productos (id_producto, descripcion_producto, precio_producto)
+VALUES (4, 'Cama matrimonial', 600.00);
+
+INSERT INTO productos (id_producto, descripcion_producto, precio_producto)
+VALUES (5, 'Armario de roble', 450.00);
+
+
+
+--TABLA PUESTOS--
+
+INSERT INTO puestos (id_puesto, descripcion_puesto, salario_puesto)
+VALUES (1, 'Ingeniero', 2500.00);
+
+INSERT INTO puestos (id_puesto, descripcion_puesto, salario_puesto)
+VALUES (2, 'Asistente Administrativo', 1500.00);
+
+INSERT INTO puestos (id_puesto, descripcion_puesto, salario_puesto)
+VALUES (3, 'Contador', 2800.00);
+
+INSERT INTO puestos (id_puesto, descripcion_puesto, salario_puesto)
+VALUES (4, 'Vendedor', 1800.00);
+
+INSERT INTO puestos (id_puesto, descripcion_puesto, salario_puesto)
+VALUES (5, 'Recepcionista', 1200.00);
+
+--TABLA EMPLEADOS--
+
+INSERT INTO empleados (cedula_empleado, nombre, correo_empresa, clave_empresa, id_puesto)
+VALUES ('111111111', 'Jos√© Rodr√≠guez', 'jose@email.com', 'clave123', 1);
+
+INSERT INTO empleados (cedula_empleado, nombre, correo_empresa, clave_empresa, id_puesto)
+VALUES ('222222222', 'Ana Guti√©rrez', 'ana@email.com', 'clave456', 2);
+
+INSERT INTO empleados (cedula_empleado, nombre, correo_empresa, clave_empresa, id_puesto)
+VALUES ('333333333', 'Laura Ramirez', 'laura@email.com', 'clave789', 1);
+
+INSERT INTO empleados (cedula_empleado, nombre, correo_empresa, clave_empresa, id_puesto)
+VALUES ('444444444', 'Carlos Fernandez', 'carlos@email.com', 'claveabc', 2);
+
+INSERT INTO empleados (cedula_empleado, nombre, correo_empresa, clave_empresa, id_puesto)
+VALUES ('888888888', 'Mar√≠a Fern√°ndez', 'maria@email.com', 'clavexyz', 2);
+
+--TABLA METODOS_PAGO
+
+INSERT INTO metodos_pago (id_metodo, descripcion)
+VALUES (1, 'Tarjeta de cr√©dito');
+
+INSERT INTO metodos_pago (id_metodo, descripcion)
+VALUES (2, 'Efectivo');
+
+INSERT INTO metodos_pago (id_metodo, descripcion)
+VALUES (3, 'Transferencia bancaria');
+
+INSERT INTO metodos_pago (id_metodo, descripcion)
+VALUES (4, 'Pago en cuotas');
+
+INSERT INTO metodos_pago (id_metodo, descripcion)
+VALUES (5, 'Transferencia bancaria nacional');
+
+
+--TABLA TELEFONOS--
+
+INSERT INTO telefonos (id_telefono, numero_telefono)
+VALUES (1, '+506 8888-1111');
+
+INSERT INTO telefonos (id_telefono, numero_telefono)
+VALUES (2, '+506 8888-2222');
+
+INSERT INTO telefonos (id_telefono, numero_telefono)
+VALUES (3, '+506 8888-3333');
+
+INSERT INTO telefonos (id_telefono, numero_telefono)
+VALUES (4, '+506 8888-4444');
+
+INSERT INTO telefonos (id_telefono, numero_telefono)
+VALUES (5, '+506 8888-5555');
+
+--TABLA TELEFONO_CLIENTE
+
+INSERT INTO telefono_cliente (telefonos_id_telefono, clientes_cedula_cliente)
+VALUES (1, '123456789');
+
+INSERT INTO telefono_cliente (telefonos_id_telefono, clientes_cedula_cliente)
+VALUES (2, '987654321');
+
+INSERT INTO telefono_cliente (telefonos_id_telefono, clientes_cedula_cliente)
+VALUES (3, '123456789');
+
+INSERT INTO telefono_cliente (telefonos_id_telefono, clientes_cedula_cliente)
+VALUES (4, '123456789');
+
+INSERT INTO telefono_cliente (telefonos_id_telefono, clientes_cedula_cliente)
+VALUES (5, '987654321');
+
+--TABLA DIRECCION--
+
+INSERT INTO direccion (id_direccion, id_provincia, direccion_general)
+VALUES (1, 1, 'Avenida Central, San Jos√©');
+
+INSERT INTO direccion (id_direccion, id_provincia, direccion_general)
+VALUES (2, 2, 'Barrio Flores, Heredia');
+
+INSERT INTO direccion (id_direccion, id_provincia, direccion_general)
+VALUES (3, 3, 'Barrio El Carmen, Alajuela');
+
+INSERT INTO direccion (id_direccion, id_provincia, direccion_general)
+VALUES (4, 4, 'Cartago centro, Cartago');
+
+INSERT INTO direccion (id_direccion, id_provincia, direccion_general)
+VALUES (5, 5, 'Playa Jac√≥, Puntarenas');
+
+--TABLA DIRECCION_CLIENTE--
+
+INSERT INTO direccion_cliente (cedula_cliente, id_direccion)
+VALUES ('123456789', 1);
+
+INSERT INTO direccion_cliente (cedula_cliente, id_direccion)
+VALUES ('987654321', 2);
+
+INSERT INTO direccion_cliente (cedula_cliente, id_direccion)
+VALUES ('987654321', 3);
+
+INSERT INTO direccion_cliente (cedula_cliente, id_direccion)
+VALUES ('555555555', 4);
+
+INSERT INTO direccion_cliente (cedula_cliente, id_direccion)
+VALUES ('666666666', 5);
+
+
+
+
