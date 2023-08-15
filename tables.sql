@@ -290,21 +290,6 @@ CREATE TABLE venta_producto (
 );
 --ventas_prodcuto-- 
 
---tabla historicos_facturas--
-CREATE TABLE tabla_historicos (
-    id_registro NUMBER PRIMARY KEY,
-    -- Agrega aquí las columnas necesarias para almacenar la información histórica
-    -- Puedes utilizar las mismas columnas de la vista o agregar otras si es necesario
-    fecha_historico DATE,
-    columna1 VARCHAR2(50),
-    columna2 NUMBER,
-    -- ... Agrega más columnas si es necesario
-    CONSTRAINT fk_tabla_historicos_vista
-        -- Agrega una restricción para la clave externa si es necesario
-);
-
-
-
 SELECT TABLE_NAME
 FROM DBA_TABLES
 WHERE OWNER = 'GRUPO02';
@@ -459,18 +444,6 @@ WHERE job_name = 'CARGAR_HISTORICOS_FACTURAS';
 
 
 --------JOBS--------
--- Crear un Job que a las 1 am de todos los días pase la información de la vista a una tabla de históricos
-BEGIN
-   DBMS_SCHEDULER.create_job (
-      job_name        => 'TRANSFERIR_A_HISTORICOS_JOB',
-      job_type        => 'PLSQL_BLOCK',
-      job_action      => 'BEGIN INSERT INTO tabla_historicos SELECT * FROM tu_vista; END;',
-      start_date      => SYSTIMESTAMP,
-      repeat_interval => 'FREQ=DAILY; BYHOUR=1; BYMINUTE=0; BYSECOND=0',
-      enabled         => TRUE
-   );
-END;
-/
 
 -----PROCEDIMIETNO--------
 -- Procedimientos: Deben crear un procedimiento para cargar según por fechas de facturación (inicio y fin), el
@@ -480,26 +453,25 @@ CREATE OR REPLACE PROCEDURE CARGAR_FACTURAS_DETALLES (
     p_fecha_fin IN DATE
 ) AS
 BEGIN
-    INSERT INTO tabla_historicos (
-        id_registro,
-        fecha_historico,
-        columna1,
-        columna2
-        -- Agrega aquí las columnas de la tabla de históricos
+    INSERT INTO historicos_facturas (
+        FECHA_VENTA,
+        NOMBRE_CLIENTE,
+        MONTO_FACTURA
     )
     SELECT
-        ROW_NUMBER() OVER (ORDER BY f.fecha_facturacion, c.cedula_cliente, p.id_producto) AS id_registro,
-        f.fecha_facturacion AS fecha_historico,
-        c.cedula_cliente AS columna1,
-        p.id_producto AS columna2
-        -- Agrega aquí las columnas del detalle de facturas que desees guardar en la tabla de históricos
+        f.fecha_facturacion AS FECHA_VENTA,
+        c.nombre_cliente AS NOMBRE_CLIENTE,
+        SUM(df.cantidad_producto * p.precio_producto) AS MONTO_FACTURA
     FROM
         facturas f
         JOIN clientes c ON f.cedula_cliente = c.cedula_cliente
         JOIN detalles_factura df ON f.id_factura = df.id_factura
         JOIN productos p ON df.id_producto = p.id_producto
     WHERE
-        f.fecha_facturacion BETWEEN p_fecha_inicio AND p_fecha_fin;
+        f.fecha_facturacion BETWEEN p_fecha_inicio AND p_fecha_fin
+    GROUP BY
+        f.fecha_facturacion,
+        c.nombre_cliente;
 
     COMMIT;
 EXCEPTION
@@ -508,6 +480,7 @@ EXCEPTION
         RAISE;
 END;
 /
+
 
 --EMPIEZAN INSERTS DE TABLAS--
 
