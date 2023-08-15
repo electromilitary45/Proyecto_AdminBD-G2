@@ -766,4 +766,90 @@ INSERT INTO inventario (id_proveedor, id_producto, cantidad)
 VALUES ('PROV004', 4, 150);
 
 --TERMINAN INSERTS--
+-----------------------SENTENCIAS SQL------------------------------
+-- Cliente que realiza más compras (facturación total):
+SELECT
+    c.cedula_cliente,
+    c.nombre_cliente,
+    SUM(df.cantidad_producto * p.precio_producto) AS total_facturado
+FROM
+    clientes c
+    JOIN facturas f ON c.cedula_cliente = f.cedula_cliente
+    JOIN detalles_factura df ON f.id_factura = df.id_factura
+    JOIN productos p ON df.id_producto = p.id_producto
+GROUP BY
+    c.cedula_cliente, c.nombre_cliente
+ORDER BY
+    total_facturado DESC
+FETCH FIRST 1 ROWS ONLY;
 
+-- Proveedor al que se le compra más:
+SELECT
+    pr.id_proveedor,
+    pr.nombre_proveedor,
+    SUM(i.cantidad) AS total_comprado
+FROM
+    proveedores pr
+    JOIN inventario i ON pr.id_proveedor = i.id_proveedor
+GROUP BY
+    pr.id_proveedor, pr.nombre_proveedor
+ORDER BY
+    total_comprado DESC
+FETCH FIRST 1 ROWS ONLY;
+
+-- Producto más vendido (producto estrella):
+SELECT
+    p.id_producto,
+    p.descripcion_producto,
+    SUM(df.cantidad_producto) AS total_vendido
+FROM
+    productos p
+    JOIN detalles_factura df ON p.id_producto = df.id_producto
+GROUP BY
+    p.id_producto, p.descripcion_producto
+ORDER BY
+    total_vendido DESC
+FETCH FIRST 1 ROWS ONLY;
+
+-- Clientes con más productos diferentes comprados:
+SELECT
+    c.cedula_cliente,
+    c.nombre_cliente,
+    COUNT(DISTINCT df.id_producto) AS productos_diferentes
+FROM
+    clientes c
+    JOIN facturas f ON c.cedula_cliente = f.cedula_cliente
+    JOIN detalles_factura df ON f.id_factura = df.id_factura
+GROUP BY
+    c.cedula_cliente, c.nombre_cliente
+ORDER BY
+    productos_diferentes DESC
+FETCH FIRST 3 ROWS ONLY;
+
+-- Proveedor con mayor variedad de productos:
+SELECT
+    pr.id_proveedor,
+    pr.nombre_proveedor,
+    COUNT(DISTINCT i.id_producto) AS variedad_productos
+FROM
+    proveedores pr
+    JOIN inventario i ON pr.id_proveedor = i.id_proveedor
+GROUP BY
+    pr.id_proveedor, pr.nombre_proveedor
+ORDER BY
+    variedad_productos DESC
+FETCH FIRST 1 ROWS ONLY;
+
+-- Producto con la mayor facturación total:
+SELECT
+    p.id_producto,
+    p.descripcion_producto,
+    SUM(df.cantidad_producto * p.precio_producto) AS total_facturado
+FROM
+    productos p
+    JOIN detalles_factura df ON p.id_producto = df.id_producto
+GROUP BY
+    p.id_producto, p.descripcion_producto
+ORDER BY
+    total_facturado DESC
+FETCH FIRST 1 ROWS ONLY;
